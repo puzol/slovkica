@@ -294,7 +294,6 @@ legend,
 
 .tile.flip {
   animation: flip 0.5s ease;
-  transition: background-color 0s linear 0.25s, border-color 0s linear 0.25s;
 }
 
 .tile.correct {
@@ -433,9 +432,5 @@ legend,
   .tile.bounce,
   .row.shake {
     animation: none;
-  }
-
-  .tile.flip {
-    transition: none;
   }
 }

@@ -306,21 +306,31 @@
     chars.forEach(function (ch, index) {
       var tile = row.children[index];
       function show() {
-        tile.textContent = ch;
-        tile.classList.add('filled', 'flip', marks[index]);
         var called = false;
+        var painted = false;
+        function paint() {
+          if (painted) return;
+          painted = true;
+          tile.textContent = ch;
+          tile.classList.add('filled', marks[index]);
+        }
         function doneTile() {
           if (called) return;
           called = true;
+          paint();
           tile.removeEventListener('animationend', doneTile);
           upgradeKey(ch, marks[index]);
           one();
         }
+        tile.classList.remove('pop');
+        void tile.offsetWidth;
+        tile.classList.add('flip');
         if (reduce) {
           doneTile();
           return;
         }
         tile.addEventListener('animationend', doneTile);
+        setTimeout(paint, 250);
         setTimeout(doneTile, 700);
       }
       if (reduce) show();
